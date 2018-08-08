@@ -73,6 +73,11 @@ public abstract class OnCallbackCompletedListener<T> implements OnCallbackListen
         try {
             hideLoad();
             int code = response.code();
+            switch (code) {
+                case 200:
+                    onSuccess(response.body());
+                    break;
+            }
 
         } catch (Exception e) {
             hideLoad();

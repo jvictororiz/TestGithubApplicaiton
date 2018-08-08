@@ -4,24 +4,35 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
+import coopcerto.br.com.cabal.testgithubapplicaiton.model.Issue;
+
 public class PullRequestResponse {
-    @SerializedName("total_count")
-    private int totalCount;
-    private List<Issue> items;
 
-    public int getTotalCount() {
-        return totalCount;
+    private int number;
+    private String title;
+    private boolean locked;
+
+    public int getNumber() {
+        return number;
     }
 
-    public void setTotalCount(int totalCount) {
-        this.totalCount = totalCount;
+    public void setNumber(int number) {
+        this.number = number;
     }
 
-    public List<Issue> getItems() {
-        return items;
+    public String getTitle() {
+        return title;
     }
 
-    public void setItems(List<Issue> items) {
-        this.items = items;
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public boolean isLocked() {
+        return locked;
+    }
+
+    public void setLocked(boolean locked) {
+        this.locked = locked;
     }
 }

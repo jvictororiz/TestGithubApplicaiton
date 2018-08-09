@@ -2,7 +2,7 @@ package coopcerto.br.com.cabal.testgithubapplicaiton.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class User {
+public class UserEntry {
     private String login;
     @SerializedName("avatar_url")
     private String avatarUrl;

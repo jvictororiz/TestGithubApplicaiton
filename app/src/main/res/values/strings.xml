@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">TestGithubApplicaiton</string>
+    <string name="message_erro_search">Formato de busca inválido</string>
+    <string name="search_hint">Buscar por repositórios</string>
 </resources>

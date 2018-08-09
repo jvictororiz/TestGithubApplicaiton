@@ -2,15 +2,32 @@ package coopcerto.br.com.cabal.testgithubapplicaiton.service.retrofit.response;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
+import coopcerto.br.com.cabal.testgithubapplicaiton.model.UserEntry;
 
-import coopcerto.br.com.cabal.testgithubapplicaiton.model.Issue;
-
-public class PullRequestResponse {
+public class RepositoriesReponse {
 
     private int number;
     private String title;
     private boolean locked;
+    @SerializedName("html_url")
+    private String htmlUrl;
+    private UserEntry user;
+
+    public UserEntry getUser() {
+        return user;
+    }
+
+    public void setUser(UserEntry user) {
+        this.user = user;
+    }
+
+    public String getHtmlUrl() {
+        return htmlUrl;
+    }
+
+    public void setHtmlUrl(String htmlUrl) {
+        this.htmlUrl = htmlUrl;
+    }
 
     public int getNumber() {
         return number;

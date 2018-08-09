@@ -1,20 +1,28 @@
 package coopcerto.br.com.cabal.testgithubapplicaiton.model;
 
-import com.google.gson.annotations.SerializedName;
-
-public class Issue {
+public class RepositoryEntry {
     private int number;
     private String title;
     private boolean locked;
     private int comments;
     private double score;
-    private User user;
+    private String body;
+    private UserEntry user;
 
-    public User getUser() {
+
+    public String getBody() {
+        return body;
+    }
+
+    public void setBody(String body) {
+        this.body = body;
+    }
+
+    public UserEntry getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(UserEntry user) {
         this.user = user;
     }
 

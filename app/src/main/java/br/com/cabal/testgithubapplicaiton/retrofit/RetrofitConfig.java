@@ -3,7 +3,9 @@ package br.com.cabal.testgithubapplicaiton.retrofit;
 import android.support.annotation.NonNull;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
+import br.com.cabal.testgithubapplicaiton.BuildConfig;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -21,7 +23,7 @@ class RetrofitConfig {
     }
 
     private static Retrofit buildRetrofit() {
-        String baseUrl = "https://api.github.com/";
+        String baseUrl = BuildConfig.URL;//"https://api.github.com/";
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
@@ -29,6 +31,9 @@ class RetrofitConfig {
         client = new OkHttpClient.Builder()
                 //.addInterceptor(buildInterceptor())
                 .addInterceptor(interceptor)
+                .readTimeout(TIMEOUT_SECOUNDS , TimeUnit.SECONDS)
+                .connectTimeout(TIMEOUT_SECOUNDS , TimeUnit.SECONDS)
+                .writeTimeout(TIMEOUT_SECOUNDS , TimeUnit.SECONDS)
                 .build();
 
         return new Retrofit.Builder()

@@ -1,22 +1,29 @@
 package coopcerto.br.com.cabal.testgithubapplicaiton.service.retrofit.response;
 
+import android.arch.persistence.room.Embedded;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
 import coopcerto.br.com.cabal.testgithubapplicaiton.model.UserEntry;
 
+@Entity
 public class RepositoriesReponse implements Serializable {
 
+    @PrimaryKey
     private int number;
     private String title;
     private boolean locked;
-    @SerializedName("html_url")
-    private String htmlUrl;
+    @Embedded
     private UserEntry user;
     private String body;
     private boolean isPull;
-
+    @SerializedName("html_url")
+    private String htmlUrl;
 
 
 

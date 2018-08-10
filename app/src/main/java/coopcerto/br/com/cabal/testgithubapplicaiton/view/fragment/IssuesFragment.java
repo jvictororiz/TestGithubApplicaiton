@@ -14,6 +14,7 @@ import android.widget.Toast;
 import java.util.List;
 
 import coopcerto.br.com.cabal.testgithubapplicaiton.R;
+import coopcerto.br.com.cabal.testgithubapplicaiton.model.persistence.controller.RepositoryPersistenceController;
 import coopcerto.br.com.cabal.testgithubapplicaiton.service.retrofit.response.RepositoriesReponse;
 import coopcerto.br.com.cabal.testgithubapplicaiton.util.AnimationUtils;
 import coopcerto.br.com.cabal.testgithubapplicaiton.view.activities.WebViewActivity;
@@ -23,7 +24,6 @@ public class IssuesFragment extends SuperFragment implements RepositoryAdapter.O
 
     private List<RepositoriesReponse> repositoryEntries;
     private RecyclerView recyclerIssues;
-    private RepositoryAdapter repositoryAdapter;
 
     public static IssuesFragment newInstance() {
         Bundle args = new Bundle();
@@ -35,7 +35,7 @@ public class IssuesFragment extends SuperFragment implements RepositoryAdapter.O
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return LayoutInflater.from(getActivity()).inflate(R.layout.fragment_issues, container, false);
+        return inflater.inflate(R.layout.fragment_issues, container, false);
     }
 
     @Override
@@ -47,7 +47,7 @@ public class IssuesFragment extends SuperFragment implements RepositoryAdapter.O
     private void initList() {
         recyclerIssues.setLayoutManager(new LinearLayoutManager(getActivity()));
         AnimationUtils.configAnimatinoRecyclerView(getActivity(), recyclerIssues);
-        repositoryAdapter = new RepositoryAdapter(getActivity(), repositoryEntries, this);
+        RepositoryAdapter repositoryAdapter = new RepositoryAdapter(getActivity(), repositoryEntries, this);
         recyclerIssues.setAdapter(repositoryAdapter);
     }
 
@@ -64,7 +64,8 @@ public class IssuesFragment extends SuperFragment implements RepositoryAdapter.O
 
     @Override
     public void clickButotnSave(RepositoriesReponse repositoriesReponse) {
-        Toast.makeText(getActivity(), "Salvo aqui", Toast.LENGTH_SHORT).show();
+        new RepositoryPersistenceController().addRepository(repositoriesReponse);
+        Toast.makeText(getActivity(), R.string.save_sucessfull, Toast.LENGTH_SHORT).show();
     }
 
     @Override

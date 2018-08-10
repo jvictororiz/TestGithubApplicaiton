@@ -11,5 +11,6 @@
     <color name="cinza">#f4f6f8</color>
     <color name="black">#000</color>
     <color name="colorText">#7e8ca0</color>
+    <color name="colorRed">#e14b3d</color>
 
 </resources>

@@ -14,6 +14,7 @@ import android.widget.Toast;
 import java.util.List;
 
 import coopcerto.br.com.cabal.testgithubapplicaiton.R;
+import coopcerto.br.com.cabal.testgithubapplicaiton.model.persistence.controller.RepositoryPersistenceController;
 import coopcerto.br.com.cabal.testgithubapplicaiton.service.retrofit.response.RepositoriesReponse;
 import coopcerto.br.com.cabal.testgithubapplicaiton.util.AnimationUtils;
 import coopcerto.br.com.cabal.testgithubapplicaiton.view.activities.WebViewActivity;
@@ -35,7 +36,7 @@ public class FavoritesRepositoriesFragment extends SuperFragment implements Repo
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return LayoutInflater.from(getActivity()).inflate(R.layout.fragment_favorites_repositories, container, false);
+        return inflater.inflate(R.layout.fragment_favorites_repositories, container, false);
     }
 
     @Override
@@ -44,10 +45,18 @@ public class FavoritesRepositoriesFragment extends SuperFragment implements Repo
         setViews();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        repositoryEntries = new RepositoryPersistenceController().getRepositories();
+        initList();
+
+    }
+
     private void initList() {
         recyclerRepositories.setLayoutManager(new LinearLayoutManager(getActivity()));
         AnimationUtils.configAnimatinoRecyclerView(getActivity(), recyclerRepositories);
-        repositoryAdapter = new RepositoryAdapter(getActivity(), repositoryEntries, this);
+        repositoryAdapter = new RepositoryAdapter(getActivity(), getString(R.string.text_button_one), R.color.colorRed, R.drawable.shape_line_background_red, repositoryEntries, this);
         recyclerRepositories.setAdapter(repositoryAdapter);
     }
 
@@ -57,15 +66,11 @@ public class FavoritesRepositoriesFragment extends SuperFragment implements Repo
         }
     }
 
-    public void refreshListPulls(List<RepositoriesReponse> repositoryEntries) {
-        this.repositoryEntries = repositoryEntries;
-        initList();
-
-    }
-
     @Override
     public void clickButotnSave(RepositoriesReponse repositoriesReponse) {
-        Toast.makeText(getActivity(), "Salvo aqui", Toast.LENGTH_SHORT).show();
+        new RepositoryPersistenceController().removeRepository(repositoriesReponse);
+        this.repositoryEntries.remove(repositoriesReponse);
+        initList();
     }
 
     @Override

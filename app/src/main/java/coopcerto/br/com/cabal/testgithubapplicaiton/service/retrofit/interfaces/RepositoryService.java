@@ -10,9 +10,9 @@ import retrofit2.http.Query;
 
 public interface RepositoryService {
 
-    @GET("repos/{login}/{nameRep}/crea/pulls")
-    Call<List<RepositoriesReponse>> findPullRequestByRepository(@Path("login") String login, @Path("nameRep") String name);
+    @GET("repos/{login}/{nameRep}/pulls")
+    Call<List<RepositoriesReponse>> findPullRequestByRepository(@Path("login") String login, @Path("nameRep") String name, @Query("direction") String direction);
 
     @GET("repos/{login}/{nameRep}/issues")
-    Call<List<RepositoriesReponse>> findIssuesByRepository(@Path("login") String login, @Path("nameRep") String name);
+    Call<List<RepositoriesReponse>> findIssuesByRepository(@Path("login") String login, @Path("nameRep") String name, @Query("direction") String direction);
 }

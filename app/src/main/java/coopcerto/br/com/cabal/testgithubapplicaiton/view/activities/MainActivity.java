@@ -6,6 +6,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.SearchView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import java.util.List;
@@ -26,6 +27,7 @@ public class MainActivity extends SuperActivity {
     private ViewGroup llBody;
     private TabLayout tabFragments;
     private ViewPager pagerFragments;
+    private ProgressBar pbLoad;
     private PullRequestFragment pullRequestFragment;
     private IssuesFragment issuesFragment;
     private FavoritesRepositoriesFragment favoritesRepositoriesFragment;
@@ -38,7 +40,6 @@ public class MainActivity extends SuperActivity {
         configViews();
         setEventSearchView();
         tabFragments.setVisibility(View.GONE);
-
     }
 
     private void setEventSearchView() {
@@ -87,14 +88,28 @@ public class MainActivity extends SuperActivity {
     }
 
     private void getPullRequests(String query) {
+        showLoad();
         RepositoryController.findPullRequestByRpository(query, new OnCallbackCompletedListener<List<RepositoriesReponse>>(this, false) {
             @Override
             public void onSuccess(List<RepositoriesReponse> response) {
+                MainActivity.this.hideLoad();
                 if (response != null && !response.isEmpty()) {
                     pullRequestFragment.refreshListPulls(response);
                 } else {
                     Toast.makeText(MainActivity.this, R.string.pull_empty, Toast.LENGTH_SHORT).show();
                 }
+            }
+
+            @Override
+            public void onError(ErroResponse erro) {
+                super.onError(erro);
+                MainActivity.this.hideLoad();
+            }
+
+            @Override
+            public void onFaild(Throwable erro) {
+                super.onFaild(erro);
+                MainActivity.this.hideLoad();
             }
         });
     }
@@ -116,10 +131,21 @@ public class MainActivity extends SuperActivity {
         return query.contains("/") && query.length() >= 3 && query.indexOf("/") != 0 && query.indexOf("/") != query.length() - 1;
     }
 
+    private void showLoad() {
+        pbLoad.setVisibility(View.VISIBLE);
+        pagerFragments.setVisibility(View.GONE);
+    }
+
+    private void hideLoad() {
+        pbLoad.setVisibility(View.GONE);
+        pagerFragments.setVisibility(View.VISIBLE);
+    }
+
     private void setViews() {
         llBody = findViewById(R.id.ll_body);
         searchView = findViewById(R.id.search_view);
         tabFragments = findViewById(R.id.tab_fragments);
+        pbLoad = findViewById(R.id.pb_load);
         pagerFragments = findViewById(R.id.pager_fragment);
     }
 }

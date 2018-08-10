@@ -9,12 +9,14 @@ import coopcerto.br.com.cabal.testgithubapplicaiton.view.connectionServer.OnCall
 import coopcerto.br.com.cabal.testgithubapplicaiton.view.objects.ErroResponse;
 
 public class RepositoryController {
+    private static final String ORDER_DEFAULT = "asc";
+
     public static void findPullRequestByRpository(String query, OnCallbackCompletedListener<List<RepositoriesReponse>> callback) {
-        Api.repositoryService().findPullRequestByRepository(getLogin(query), getRepositoryName(query)).enqueue(callback);
+        Api.repositoryService().findPullRequestByRepository(getLogin(query), getRepositoryName(query), ORDER_DEFAULT).enqueue(callback);
     }
 
     public static void findIssuesByRepository(String query, final OnCallbackCompletedListener<List<RepositoriesReponse>> callback) {
-        Api.repositoryService().findIssuesByRepository(getLogin(query), getRepositoryName(query)).enqueue(callback);
+        Api.repositoryService().findIssuesByRepository(getLogin(query), getRepositoryName(query), ORDER_DEFAULT).enqueue(callback);
     }
 
     private static String getLogin(String query) {

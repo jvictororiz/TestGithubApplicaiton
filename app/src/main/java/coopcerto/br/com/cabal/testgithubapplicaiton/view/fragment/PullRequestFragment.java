@@ -14,6 +14,8 @@ import android.widget.Toast;
 import java.util.List;
 
 import coopcerto.br.com.cabal.testgithubapplicaiton.R;
+import coopcerto.br.com.cabal.testgithubapplicaiton.controller.RepositoryController;
+import coopcerto.br.com.cabal.testgithubapplicaiton.model.persistence.controller.RepositoryPersistenceController;
 import coopcerto.br.com.cabal.testgithubapplicaiton.service.retrofit.response.RepositoriesReponse;
 import coopcerto.br.com.cabal.testgithubapplicaiton.util.AnimationUtils;
 import coopcerto.br.com.cabal.testgithubapplicaiton.view.activities.WebViewActivity;
@@ -23,7 +25,6 @@ public class PullRequestFragment extends SuperFragment implements RepositoryAdap
 
     private List<RepositoriesReponse> repositoryEntries;
     private RecyclerView recyclerPull;
-    private RepositoryAdapter repositoryAdapter;
 
     public static PullRequestFragment newInstance() {
         Bundle args = new Bundle();
@@ -35,7 +36,7 @@ public class PullRequestFragment extends SuperFragment implements RepositoryAdap
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return LayoutInflater.from(getActivity()).inflate(R.layout.fragment_pull_request, container, false);
+        return inflater.inflate(R.layout.fragment_pull_request, container, false);
     }
 
     @Override
@@ -44,10 +45,18 @@ public class PullRequestFragment extends SuperFragment implements RepositoryAdap
         setViews();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (repositoryEntries != null) {
+            initList();
+        }
+    }
+
     private void initList() {
         recyclerPull.setLayoutManager(new LinearLayoutManager(getActivity()));
         AnimationUtils.configAnimatinoRecyclerView(getActivity(), recyclerPull);
-        repositoryAdapter = new RepositoryAdapter(getActivity(), repositoryEntries, this);
+        RepositoryAdapter repositoryAdapter = new RepositoryAdapter(getActivity(), repositoryEntries, this);
         recyclerPull.setAdapter(repositoryAdapter);
     }
 
@@ -64,7 +73,8 @@ public class PullRequestFragment extends SuperFragment implements RepositoryAdap
 
     @Override
     public void clickButotnSave(RepositoriesReponse repositoriesReponse) {
-        Toast.makeText(getActivity(), "Salvo aqui", Toast.LENGTH_SHORT).show();
+        new RepositoryPersistenceController().addRepository(repositoriesReponse);
+        Toast.makeText(getActivity(), R.string.save_sucessfull, Toast.LENGTH_SHORT).show();
     }
 
     @Override

@@ -1,7 +1,11 @@
 package coopcerto.br.com.cabal.testgithubapplicaiton.model;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+
 import com.google.gson.annotations.SerializedName;
 
+@Entity
 public class UserEntry {
     private String login;
     @SerializedName("avatar_url")

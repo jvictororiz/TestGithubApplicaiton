@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">TestGithubApplicaiton</string>
-    <string name="message_erro_search">Formato de busca inválido</string>
     <string name="search_hint">Buscar por repositórios</string>
     <string name="tab_pull_request">Pulls</string>
     <string name="salvar">Salvar</string>
@@ -15,5 +14,4 @@
     <string name="pull_empty">Nenhum pull request encontrado</string>
     <string name="save_sucessfull">Repositório savlo !</string>
     <string name="text_button_one">Remover</string>
-    <string name="text_button_two">Visitar repositório</string>
 </resources>

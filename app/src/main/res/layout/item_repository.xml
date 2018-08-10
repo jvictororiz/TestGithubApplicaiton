@@ -26,7 +26,6 @@
                 android:layout_height="38dp"
                 android:layout_marginBottom="35dp"
                 android:layout_marginEnd="35dp"
-                android:layout_marginRight="35dp"
                 android:layout_marginTop="35dp" />
 
             <LinearLayout
@@ -35,7 +34,8 @@
                 android:layout_marginEnd="20dp"
                 android:gravity="start|center"
                 android:orientation="vertical"
-                android:paddingRight="12dp">
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp">
 
 
                 <TextView

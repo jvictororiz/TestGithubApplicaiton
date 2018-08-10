@@ -19,15 +19,15 @@ import coopcerto.br.com.cabal.testgithubapplicaiton.util.AnimationUtils;
 import coopcerto.br.com.cabal.testgithubapplicaiton.view.activities.WebViewActivity;
 import coopcerto.br.com.cabal.testgithubapplicaiton.view.adapters.RepositoryAdapter;
 
-public class PullRequestFragment extends SuperFragment implements RepositoryAdapter.OnClickButtons {
+public class IssuesFragment extends SuperFragment implements RepositoryAdapter.OnClickButtons {
 
     private List<RepositoriesReponse> repositoryEntries;
-    private RecyclerView recyclerPull;
+    private RecyclerView recyclerIssues;
     private RepositoryAdapter repositoryAdapter;
 
-    public static PullRequestFragment newInstance() {
+    public static IssuesFragment newInstance() {
         Bundle args = new Bundle();
-        PullRequestFragment fragment = new PullRequestFragment();
+        IssuesFragment fragment = new IssuesFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -35,7 +35,7 @@ public class PullRequestFragment extends SuperFragment implements RepositoryAdap
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return LayoutInflater.from(getActivity()).inflate(R.layout.fragment_pull_request, container, false);
+        return LayoutInflater.from(getActivity()).inflate(R.layout.fragment_issues, container, false);
     }
 
     @Override
@@ -45,15 +45,15 @@ public class PullRequestFragment extends SuperFragment implements RepositoryAdap
     }
 
     private void initList() {
-        recyclerPull.setLayoutManager(new LinearLayoutManager(getActivity()));
-        AnimationUtils.configAnimatinoRecyclerView(getActivity(), recyclerPull);
+        recyclerIssues.setLayoutManager(new LinearLayoutManager(getActivity()));
+        AnimationUtils.configAnimatinoRecyclerView(getActivity(), recyclerIssues);
         repositoryAdapter = new RepositoryAdapter(getActivity(), repositoryEntries, this);
-        recyclerPull.setAdapter(repositoryAdapter);
+        recyclerIssues.setAdapter(repositoryAdapter);
     }
 
     private void setViews() {
         if (getView() != null) {
-            recyclerPull = getView().findViewById(R.id.recycler_pull);
+            recyclerIssues = getView().findViewById(R.id.recycler_pull);
         }
     }
 

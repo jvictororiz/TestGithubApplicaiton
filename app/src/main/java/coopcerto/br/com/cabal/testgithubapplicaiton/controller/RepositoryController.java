@@ -1,17 +1,19 @@
 package coopcerto.br.com.cabal.testgithubapplicaiton.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import coopcerto.br.com.cabal.testgithubapplicaiton.service.retrofit.Api;
 import coopcerto.br.com.cabal.testgithubapplicaiton.service.retrofit.response.RepositoriesReponse;
 import coopcerto.br.com.cabal.testgithubapplicaiton.view.connectionServer.OnCallbackCompletedListener;
+import coopcerto.br.com.cabal.testgithubapplicaiton.view.objects.ErroResponse;
 
 public class RepositoryController {
     public static void findPullRequestByRpository(String query, OnCallbackCompletedListener<List<RepositoriesReponse>> callback) {
         Api.repositoryService().findPullRequestByRepository(getLogin(query), getRepositoryName(query)).enqueue(callback);
     }
 
-    public static void findIssuesByRepository(String query, OnCallbackCompletedListener<List<RepositoriesReponse>> callback) {
+    public static void findIssuesByRepository(String query, final OnCallbackCompletedListener<List<RepositoriesReponse>> callback) {
         Api.repositoryService().findIssuesByRepository(getLogin(query), getRepositoryName(query)).enqueue(callback);
     }
 
@@ -22,6 +24,6 @@ public class RepositoryController {
 
     private static String getRepositoryName(String query) {
         int positionDivision = query.indexOf("/");
-        return query.substring(positionDivision+1);
+        return query.substring(positionDivision + 1);
     }
 }

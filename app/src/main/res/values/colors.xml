@@ -4,9 +4,12 @@
     <color name="colorPrimaryDark">#282c30</color>
     <color name="colorAccent">#f4f6f8</color>
     <color name="blueInit">#daebfb</color>
+    <color name="blue">#0567d6</color>
     <color name="greenInit">#3ccf55</color>
     <color name="greenFinal">#31a845</color>
     <color name="white">#fff</color>
     <color name="cinza">#f4f6f8</color>
     <color name="black">#000</color>
+    <color name="colorText">#7e8ca0</color>
+
 </resources>

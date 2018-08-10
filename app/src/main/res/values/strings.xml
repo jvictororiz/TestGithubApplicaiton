@@ -2,4 +2,15 @@
     <string name="app_name">TestGithubApplicaiton</string>
     <string name="message_erro_search">Formato de busca inválido</string>
     <string name="search_hint">Buscar por repositórios</string>
+    <string name="tab_pull_request">Pulls</string>
+    <string name="salvar">Salvar</string>
+    <string name="visitar_reposit_rio">Visitar repositório</string>
+    <string name="erro_repository_invalid">Nome de repositório inválido</string>
+    <string name="tab_issue">Issues</string>
+    <string name="tab_favorites_repositories">Favoritos</string>
+    <string name="text_empty">Sem informação</string>
+    <string name="erro_connection">Sem conexão</string>
+    <string name="erro_default">Erro interno</string>
+    <string name="issues_empty">Nenhuma issues encontrado</string>
+    <string name="pull_empty">Nenhum pull request encontrado</string>
 </resources>

@@ -19,15 +19,15 @@ import coopcerto.br.com.cabal.testgithubapplicaiton.util.AnimationUtils;
 import coopcerto.br.com.cabal.testgithubapplicaiton.view.activities.WebViewActivity;
 import coopcerto.br.com.cabal.testgithubapplicaiton.view.adapters.RepositoryAdapter;
 
-public class PullRequestFragment extends SuperFragment implements RepositoryAdapter.OnClickButtons {
+public class FavoritesRepositoriesFragment extends SuperFragment implements RepositoryAdapter.OnClickButtons {
 
     private List<RepositoriesReponse> repositoryEntries;
-    private RecyclerView recyclerPull;
+    private RecyclerView recyclerRepositories;
     private RepositoryAdapter repositoryAdapter;
 
-    public static PullRequestFragment newInstance() {
+    public static FavoritesRepositoriesFragment newInstance() {
         Bundle args = new Bundle();
-        PullRequestFragment fragment = new PullRequestFragment();
+        FavoritesRepositoriesFragment fragment = new FavoritesRepositoriesFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -35,7 +35,7 @@ public class PullRequestFragment extends SuperFragment implements RepositoryAdap
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return LayoutInflater.from(getActivity()).inflate(R.layout.fragment_pull_request, container, false);
+        return LayoutInflater.from(getActivity()).inflate(R.layout.fragment_favorites_repositories, container, false);
     }
 
     @Override
@@ -45,21 +45,22 @@ public class PullRequestFragment extends SuperFragment implements RepositoryAdap
     }
 
     private void initList() {
-        recyclerPull.setLayoutManager(new LinearLayoutManager(getActivity()));
-        AnimationUtils.configAnimatinoRecyclerView(getActivity(), recyclerPull);
+        recyclerRepositories.setLayoutManager(new LinearLayoutManager(getActivity()));
+        AnimationUtils.configAnimatinoRecyclerView(getActivity(), recyclerRepositories);
         repositoryAdapter = new RepositoryAdapter(getActivity(), repositoryEntries, this);
-        recyclerPull.setAdapter(repositoryAdapter);
+        recyclerRepositories.setAdapter(repositoryAdapter);
     }
 
     private void setViews() {
         if (getView() != null) {
-            recyclerPull = getView().findViewById(R.id.recycler_pull);
+            recyclerRepositories = getView().findViewById(R.id.recycler_pull);
         }
     }
 
     public void refreshListPulls(List<RepositoriesReponse> repositoryEntries) {
         this.repositoryEntries = repositoryEntries;
         initList();
+
     }
 
     @Override

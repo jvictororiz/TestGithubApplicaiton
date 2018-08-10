@@ -2,6 +2,7 @@ package coopcerto.br.com.cabal.testgithubapplicaiton.view.connectionServer;
 
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -20,6 +21,7 @@ import retrofit2.Response;
 
 public abstract class OnCallbackCompletedListener<T> implements OnCallbackListener<T>, Callback<T>, Serializable {
     private static final String ERRO_TIMEOUT = "timeout";
+    private static final String NETWORK_ERRO = "Unable to resolve host \"api.github.com\": No address associated with hostname";
     private SuperActivity activity;
     private boolean loadDialog;
     private static int attemps = 2;
@@ -66,6 +68,14 @@ public abstract class OnCallbackCompletedListener<T> implements OnCallbackListen
     public void onFaild(Throwable erro) {
         hideLoad();
         treatmentFailure(erro);
+
+        switch (erro.getMessage()){
+            case NETWORK_ERRO:
+                Toast.makeText(activity, activity.getString(R.string.erro_connection), Toast.LENGTH_SHORT).show();
+                break;
+                default:
+                    Toast.makeText(activity, activity.getString(R.string.erro_default), Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override

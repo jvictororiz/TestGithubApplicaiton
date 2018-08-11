@@ -14,4 +14,5 @@
     <string name="pull_empty">Nenhum pull request encontrado</string>
     <string name="save_sucessfull">Repositório savlo !</string>
     <string name="text_button_one">Remover</string>
+    <string name="erro_registered">Repositório já registrado</string>
 </resources>

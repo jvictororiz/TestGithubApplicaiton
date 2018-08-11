@@ -73,8 +73,13 @@ public class PullRequestFragment extends SuperFragment implements RepositoryAdap
 
     @Override
     public void clickButotnSave(RepositoriesReponse repositoriesReponse) {
-        new RepositoryPersistenceController().addRepository(repositoriesReponse);
-        Toast.makeText(getActivity(), R.string.save_sucessfull, Toast.LENGTH_SHORT).show();
+        RepositoryPersistenceController repositoryDao = new RepositoryPersistenceController();
+        if (!repositoryDao.isRegistered(repositoriesReponse)) {
+            new RepositoryPersistenceController().addRepository(repositoriesReponse);
+            Toast.makeText(getActivity(), R.string.save_sucessfull, Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(getActivity(), R.string.erro_registered, Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
